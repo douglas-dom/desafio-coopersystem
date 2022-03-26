@@ -24,7 +24,7 @@ public class CotacaoREST {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getCotacao(@QueryParam("data") String dataParam) {
+	public Response getCotacaoDia(@QueryParam("data") String dataParam) {
 			
 		Cotacao cotacao;
 		try {
