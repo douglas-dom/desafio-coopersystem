@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.PathParam;
 
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
@@ -23,8 +23,8 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 public interface CotacaoServiceInterface {
 
     @GET
-    @Path("/cotacao-dolar-dia")
-    Cotacao getCotacaoDolarDia(@QueryParam("data") String data);
+    @Path("/cotacao-dolar-dia/{data}")
+    Cotacao getCotacaoDolarDia(@PathParam("data") String data);
     
     @JsonInclude(Include.NON_NULL)
     class Cotacao {

@@ -35,7 +35,7 @@ public class CotacaoService {
 		log.info("Solicitando cotação da data - "+data.toString());
 		Cotacao cotacaoDiaAtual = cotacaoServiceInterface.getCotacaoDolarDia(data.toString());
 		log.info(cotacaoDiaAtual);
-		log.info("Solicitando cotação da data - "+data.toString());
+		log.info("Solicitando cotação da data - "+dataAnterior.toString());
 		Cotacao cotacaoDiaAnterior = cotacaoServiceInterface.getCotacaoDolarDia(dataAnterior.toString());
 		log.info(cotacaoDiaAnterior);
 		
