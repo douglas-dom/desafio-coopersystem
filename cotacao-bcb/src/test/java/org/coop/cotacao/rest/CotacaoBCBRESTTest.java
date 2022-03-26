@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
-class CotacaoRESTTest {
+class CotacaoBCBRESTTest {
 
 	@Test
 	void testGetCotacaoDia() {

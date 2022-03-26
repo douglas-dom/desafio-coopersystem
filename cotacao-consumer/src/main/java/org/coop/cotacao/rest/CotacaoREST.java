@@ -13,23 +13,23 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.coop.cotacao.exceptions.ParametroInvalidoException;
-import org.coop.cotacao.service.CotacaoBCBService;
-import org.coop.cotacao.service.interfaces.CotacaoBCBServiceInterface.Cotacao;
+import org.coop.cotacao.model.CotacaoResponse;
+import org.coop.cotacao.service.CotacaoService;
 
 @Path("/cotacao-dolar-dia")
 public class CotacaoREST {
 	
 	@Inject
-	CotacaoBCBService cotacaoBCB;
+	CotacaoService cotacaoService;
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCotacaoDia(@QueryParam("data") String dataParam) {
 			
-		Cotacao cotacao;
+		CotacaoResponse cotacao;
 		try {
 			LocalDate data = LocalDate.parse(dataParam);
-			cotacao = cotacaoBCB.getCotacaoDolarDia(data);
+			cotacao = cotacaoService.getCotacaoDolarDia(data);
 			return Response.ok(cotacao).build();
 		} catch (ParametroInvalidoException|DateTimeParseException e) {
 			return Response.status(Status.PRECONDITION_REQUIRED).entity(e.getMessage()).build();

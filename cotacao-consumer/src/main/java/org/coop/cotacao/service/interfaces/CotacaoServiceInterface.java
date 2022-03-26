@@ -1,7 +1,6 @@
 package org.coop.cotacao.service.interfaces;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.GET;
@@ -12,41 +11,22 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 @ApplicationScoped
-@RegisterRestClient(baseUri = "https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/")
-public interface CotacaoBCBServiceInterface {
+@RegisterRestClient(baseUri = "http://localhost:9101/cotacao-bcb-api")
+public interface CotacaoServiceInterface {
 
     @GET
-    @Path("/CotacaoDolarDia(dataCotacao=@dataCotacao)")
-    CotacaoDia getCotacaoDolarDia(@QueryParam("@dataCotacao") String data, @QueryParam("$format") String format);
-
-    class CotacaoDia {
-    	@JsonProperty("@odata.context")
-        public String context;
-        public List<Cotacao> value;
-        
-        @Override
-    	public String toString() {
-    		ObjectMapper mapper = new ObjectMapper();
-    		mapper.registerModule(new JavaTimeModule());
-    		mapper.enable(SerializationFeature.INDENT_OUTPUT);
-
-    		try {
-    			return mapper.writeValueAsString(this);
-    		} catch (JsonProcessingException e) {
-    			e.printStackTrace();
-    		}
-
-    		return null;
-    	}
-    }
+    @Path("/cotacao-dolar-dia")
+    Cotacao getCotacaoDolarDia(@QueryParam("data") String data);
     
+    @JsonInclude(Include.NON_NULL)
     class Cotacao {
     	public Float cotacaoCompra;
     	public Float cotacaoVenda;
