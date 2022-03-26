@@ -31,7 +31,7 @@ ENV JAVA_OPTIONS="-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jb
 #COPY target/lib/* /deployments/lib/
 #COPY target/*-runner.jar /deployments/app.jar
 
-EXPOSE 9101
+EXPOSE 9102
 USER 1001
 
 ENTRYPOINT [ "/deployments/run-java.sh" ]
